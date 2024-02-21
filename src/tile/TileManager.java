@@ -78,11 +78,11 @@ public class TileManager {
 			setup(42, "032", true); // Wall
 			setup(43, "033", false); // House
 			setup(44, "034", false); // Floor
-			setup(45, "035", false); // Table
+			setup(45, "035", true); // Table
 			setup(46, "036", false); // Stairs Down
 			setup(47, "037", false); // Stairs Up4
-			setup(48, "038", false); // Wall Right
-			setup(49, "039", false); // Wall Left
+			setup(48, "038", true); // Wall Right
+			setup(49, "039", true); // Wall Left
 	}
 	
 	// TAKES THE TILE INFORMATION
@@ -114,8 +114,6 @@ public class TileManager {
 			while (col < gp.maxWorldCol && row < gp.maxWorldRow) {
 				
 				String line = br.readLine(); // Read line and put in the String line
-				
-				System.out.println(line);
 				
 				while (col < gp.maxWorldCol) {
 					
