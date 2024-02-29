@@ -4,8 +4,11 @@ import entity.NPC_OldMan;
 import monster.MON_Fire2;
 import object.OBJ_Axe;
 import object.OBJ_BlueShield;
+import object.OBJ_Coin_Bronze;
 import object.OBJ_Door;
+import object.OBJ_Heart;
 import object.OBJ_Key;
+import object.OBJ_ManaCrystal;
 import object.OBJ_Potion;
 
 public class AssetSetter {
@@ -25,15 +28,15 @@ public class AssetSetter {
 		gp.obj[i].worldX = gp.tileSize * 13;
 		gp.obj[i].worldY = gp.tileSize * 16;
 		i++;
-		gp.obj[i] = new OBJ_Key(gp);
+		gp.obj[i] = new OBJ_Coin_Bronze(gp);
 		gp.obj[i].worldX = gp.tileSize * 11;
 		gp.obj[i].worldY = gp.tileSize * 18;
 		i++;
-		gp.obj[i] = new OBJ_Key(gp);
+		gp.obj[i] = new OBJ_Coin_Bronze(gp);
 		gp.obj[i].worldX = gp.tileSize * 12;
 		gp.obj[i].worldY = gp.tileSize * 18;
 		i++;
-		gp.obj[i] = new OBJ_Key(gp);
+		gp.obj[i] = new OBJ_Coin_Bronze(gp);
 		gp.obj[i].worldX = gp.tileSize * 13;
 		gp.obj[i].worldY = gp.tileSize * 18;
 		i++;
@@ -56,6 +59,22 @@ public class AssetSetter {
 		gp.obj[i] = new OBJ_Potion(gp);
 		gp.obj[i].worldX = gp.tileSize * 34;
 		gp.obj[i].worldY = gp.tileSize * 34;
+		i++;
+		gp.obj[i] = new OBJ_ManaCrystal(gp);
+		gp.obj[i].worldX = gp.tileSize * 30;
+		gp.obj[i].worldY = gp.tileSize * 30;
+		i++;
+		gp.obj[i] = new OBJ_ManaCrystal(gp);
+		gp.obj[i].worldX = gp.tileSize * 34;
+		gp.obj[i].worldY = gp.tileSize * 31;
+		i++;
+		gp.obj[i] = new OBJ_Heart(gp);
+		gp.obj[i].worldX = gp.tileSize * 39;
+		gp.obj[i].worldY = gp.tileSize * 23;
+		i++;
+		gp.obj[i] = new OBJ_Heart(gp);
+		gp.obj[i].worldX = gp.tileSize * 38;
+		gp.obj[i].worldY = gp.tileSize * 32;
 		i++;
 	}
 	

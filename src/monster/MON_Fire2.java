@@ -4,6 +4,10 @@ import java.util.Random;
 
 import entity.Entity;
 import main.GamePanel;
+import object.OBJ_Coin_Bronze;
+import object.OBJ_FireRock;
+import object.OBJ_Heart;
+import object.OBJ_ManaCrystal;
 
 public class MON_Fire2 extends Entity {
 
@@ -22,6 +26,7 @@ public class MON_Fire2 extends Entity {
 		attack = 5;
 		defense = 0;
 		exp = 2;
+		projectile = new OBJ_FireRock(gp);
 		
 		solidArea.x = 4;
 		solidArea.y = 18;
@@ -67,7 +72,14 @@ public class MON_Fire2 extends Entity {
 			}
 			
 			actionLockCounter = 0;
+		}
+		
+		int i = new Random().nextInt(100) + 1;
+		if(i > 99 && projectile.alive == false && shotAvailableCounter == 30) {
 			
+			projectile.set(worldX, worldY, direction, true, this);
+			gp.projectileList.add(projectile);
+			shotAvailableCounter = 0;
 		}
 	}
 	
@@ -75,5 +87,22 @@ public class MON_Fire2 extends Entity {
 		
 		actionLockCounter = 0;
 		direction = gp.player.direction; // Move in player Direction
+	}
+	
+	public void checkDrop() {
+		
+		// CAST A DIE
+		int i = new Random().nextInt(100) + 1; // Drop Rate
+		
+		// SET THE MONSTER DROP
+		if( i < 50) {
+			dropItem(new OBJ_Coin_Bronze(gp)); // DROP COIN
+		}
+		if( i >= 50 && i < 75) {
+			dropItem(new OBJ_Heart(gp));
+		}
+		if( i >= 75 && i < 100) {
+			dropItem(new OBJ_ManaCrystal(gp));
+		}
 	}
 }

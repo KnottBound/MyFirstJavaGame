@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import main.GamePanel;
 import main.KeyHandler;
+import object.OBJ_FireRock;
 import object.OBJ_Fireball;
 import object.OBJ_Key;
 import object.OBJ_Shield_Wood;
@@ -59,6 +60,9 @@ public class Player extends Entity {
 		level = 1;
 		maxLife = 6;
 		life = maxLife;
+		maxMana = 4;
+		mana = maxMana;
+		ammo = 10;
 		strength = 1; // The more Strength more Damage
 		dexterity = 1; // The more Dex less Damage Receives
 		exp = 0;
@@ -67,6 +71,7 @@ public class Player extends Entity {
 		currentWeapon = new OBJ_Sword_Normal(gp);
 		currentShield = new OBJ_Shield_Wood(gp);
 		projectile = new OBJ_Fireball(gp);
+		//projectile = new OBJ_FireRock(gp); <- if you wanna use something like ammo
 		attack = getAttack(); // Total Attack Value Strength + Weapon
 		defense = getDefense(); // Total Defense Value Dexterity + Shield
 	}
@@ -214,10 +219,14 @@ public class Player extends Entity {
 				spriteCounter = 0;
 			}
 		}
-		if(gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 30) {
+		if(gp.keyH.shotKeyPressed == true && projectile.alive == false
+				&& shotAvailableCounter == 30 && projectile.haveResource(this) == true) {
 			
 			// SET DEFAULT COORDINATES, DIRECTION AND USER
 			projectile.set(worldX, worldY, direction, true, this);
+			
+			// SUBTRACT THE COST (MANA/AMMO)
+			projectile.substractResource(this);
 			
 			// ADD IT TO THE LIST
 			gp.projectileList.add(projectile);
@@ -237,6 +246,12 @@ public class Player extends Entity {
 		
 		if(shotAvailableCounter < 30) { // Fire ball timer
 			shotAvailableCounter++;
+		}
+		if(life > maxLife) {
+			life = maxLife;
+		}
+		if(mana > maxMana) {
+			mana = maxMana;
 		}
 	}
 	
@@ -286,20 +301,27 @@ public class Player extends Entity {
 	}
 	
 	public void pickUpObject(int i) {
-		
-		String text;
-		
 		if (i != 999) { // Any number fine, just can not be in the OBJ array
-			if(inventory.size() != maxInventorySize) {
-				inventory.add(gp.obj[i]);
-				gp.playSE(1);
-				text = "Got a " + gp.obj[i].name + "!";
-			} 
-			else {
-				text = "Your inventory is full!";
-			}
-			gp.ui.addMessage(text);
+		// PICKUP ONLY ITEMS
+		if(gp.obj[i].type == type_pickupOnly) {
+		
+			gp.obj[i].use(this);
 			gp.obj[i] = null;
+		}
+		else {
+			// INVENTORY ITEMS
+			String text;
+				if(inventory.size() != maxInventorySize) {
+					inventory.add(gp.obj[i]);
+					gp.playSE(1);
+					text = "Got a " + gp.obj[i].name + "!";
+				} 
+				else {
+					text = "Your inventory is full!";
+				}
+				gp.ui.addMessage(text);
+				gp.obj[i] = null;
+			}	
 		}
 	}
 	

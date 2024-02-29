@@ -50,6 +50,7 @@ public class Entity { // Parent class for variables that will be used in player,
 	public int life;
 	public int maxMana;
 	public int mana;
+	public int ammo;
 	public int speed;
 	public int level;
 	public int strength;
@@ -64,6 +65,7 @@ public class Entity { // Parent class for variables that will be used in player,
 	public Projectile projectile;
 	
 	// ITEM ATTRIBUTES
+	public int value;
 	public int attackValue;
 	public int 	defenseValue;
 	public String description = "";
@@ -78,6 +80,7 @@ public class Entity { // Parent class for variables that will be used in player,
 	public final int type_axe = 4;
 	public final int type_shield = 5;
 	public final int type_consumable = 6;
+	public final int type_pickupOnly = 7;
 
 	public Entity(GamePanel gp) {
 		
@@ -116,6 +119,22 @@ public class Entity { // Parent class for variables that will be used in player,
  	public void use(Entity entity) {
  		
  	}
+ 	
+ 	public void checkDrop() {
+ 		
+ 	}
+ 	
+ 	public void dropItem(Entity droppedItem) {
+ 		
+ 		for(int i = 1; i < gp.obj.length; i++) {
+ 			if(gp.obj[i] == null) {
+ 				gp.obj[i] = droppedItem;
+ 				gp.obj[i].worldX = worldX; // drop item, get monster's worldX
+ 				gp.obj[i].worldY = worldY;
+ 				break;
+ 			}
+ 		}
+ 	}
 	
 	public void update() {
 		
@@ -130,18 +149,8 @@ public class Entity { // Parent class for variables that will be used in player,
 		
 		
 		if(this.type == type_monster && contactPlayer == true) {
-			if(gp.player.invincible == false) {
-				
-				 // DAMAGE CALCULATION
-				 int damage = attack - gp.player.defense; // This is damage amount
-				 if(damage < 0) {
-					 damage = 0;
-				 }
-				
-				// we can give damage
-				gp.player.life -= damage;
-				gp.player.invincible = true;
-			}
+		
+			damagePlayer(attack);
 		}
 		
 		//IF COLLISION IS FALSE, NPC CAN MOVE
@@ -178,6 +187,24 @@ public class Entity { // Parent class for variables that will be used in player,
 				invincible = false;
 				invincibleCounter = 0;
 			}
+		}
+		if(shotAvailableCounter < 30) { // Fire ball timer
+			shotAvailableCounter++;
+		}
+	}
+	
+	public void damagePlayer(int attack) {
+		if(gp.player.invincible == false) {
+			
+			 // DAMAGE CALCULATION
+			 int damage = attack - gp.player.defense; // This is damage amount
+			 if(damage < 0) {
+				 damage = 0;
+			 }
+			
+			// we can give damage
+			gp.player.life -= damage;
+			gp.player.invincible = true;
 		}
 	}
 	
@@ -261,7 +288,7 @@ public class Entity { // Parent class for variables that will be used in player,
 				dyingAnimation(g2);
 			}
 		
-			g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+			g2.drawImage(image, screenX, screenY, null);
 			
 			changeAlpha(g2, 1F);
 		}
