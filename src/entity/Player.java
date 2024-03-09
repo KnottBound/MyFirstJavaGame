@@ -100,14 +100,18 @@ public class Player extends Entity {
 	
 	public void getPlayerImage() {
 		
-		up1 = setup("/res/player/up1", gp.tileSize, gp.tileSize);
-		up2 = setup("/res/player/up2", gp.tileSize, gp.tileSize);
-		down1 = setup("/res/player/down1", gp.tileSize, gp.tileSize);
-		down2 = setup("/res/player/down2", gp.tileSize, gp.tileSize);
-		right1 = setup("/res/player/right1", gp.tileSize, gp.tileSize);
-		right2 = setup("/res/player/right2", gp.tileSize, gp.tileSize);
-		left1 = setup("/res/player/left1", gp.tileSize, gp.tileSize);
-		left2 = setup("/res/player/left2", gp.tileSize, gp.tileSize);
+		up1 = setup("/res/player/bobup1", gp.tileSize, gp.tileSize);
+		up2 = setup("/res/player/bobup3", gp.tileSize, gp.tileSize);
+		up3 = setup("/res/player/bobup2", gp.tileSize, gp.tileSize);
+		down1 = setup("/res/player/bobdown1", gp.tileSize, gp.tileSize);
+		down2 = setup("/res/player/bobdown3", gp.tileSize, gp.tileSize);
+		down3 = setup("/res/player/bobdown2", gp.tileSize, gp.tileSize);
+		right1 = setup("/res/player/bobright1", gp.tileSize, gp.tileSize);
+		right2 = setup("/res/player/bobright3", gp.tileSize, gp.tileSize);
+		right3 = setup("/res/player/bobright2", gp.tileSize, gp.tileSize);
+		left1 = setup("/res/player/bobleft1", gp.tileSize, gp.tileSize);
+		left2 = setup("/res/player/bobleft3", gp.tileSize, gp.tileSize);
+		left3 = setup("/res/player/bobleft2", gp.tileSize, gp.tileSize);
 	}
 	
 	public void getPlayerAttackImage() {

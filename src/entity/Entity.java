@@ -15,7 +15,7 @@ import main.UtilityTool;
 public class Entity { // Parent class for variables that will be used in player, monster, and NPC classes
 
 	GamePanel gp;
-	public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
+	public BufferedImage up1, up2, up3, down1, down2, down3, left1, left2, left3, right1, right2, right3;
 	public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2;
 	public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
 	public Rectangle attackArea = new Rectangle(0, 0, 0, 0); // Attack Area will be overrided in sub-classes
@@ -171,11 +171,16 @@ public class Entity { // Parent class for variables that will be used in player,
 			}
 		}
 		
+		// Alter the animation
 		spriteCounter++;
 		if(spriteCounter > 12) { // Player image changes every 12 seconds.
 			if(spriteNum == 1) {
 				spriteNum = 2;
-			} else if (spriteNum == 2) {
+			} 
+			else if (spriteNum == 2) {
+				spriteNum = 3;
+			}
+			else if (spriteNum == 3) {
 				spriteNum = 1;
 			}
 			spriteCounter = 0;
